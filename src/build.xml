@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<project name="lab2" default="run">
+    <target name="clean">
+        <delete dir="build"/>
+    </target>
+    <target name="compile" depends="clean">
+        <mkdir dir="build/classes"/>
+        <javac destdir="build/classes" includeantruntime="false">
+            <src path="./Moves/Physical"/>
+            <classpath>
+                <pathelement path="Pokemon.jar"/>
+            </classpath>
+        </javac>
+        <javac destdir="build/classes" includeantruntime="false">
+            <src path="./Moves/Special"/>
+            <classpath>
+                <pathelement path="Pokemon.jar"/>
+            </classpath>
+        </javac>
+        <javac destdir="build/classes" includeantruntime="false">
+            <src path="./Moves/Status"/>
+            <classpath>
+                <pathelement path="Pokemon.jar"/>
+            </classpath>
+        </javac>
+        <javac destdir="build/classes" includeantruntime="false">
+            <src path="./Pokemons"/>
+            <classpath>
+                <pathelement path="Pokemon.jar"/>
+            </classpath>
+        </javac>
+        <javac destdir="build/classes" includeantruntime="false">
+            <src path="./"/>
+            <classpath>
+                <pathelement path="Pokemon.jar"/>
+            </classpath>
+        </javac>
+    </target>
+
+    <target name="package" depends="compile">
+        <jar destfile="${ant.project.name}.jar" basedir="build/classes">
+            <zipgroupfileset dir="." includes="Pokemon.jar" />
+            <manifest>
+                <attribute name="Main-Class" value="Main"/>
+            </manifest>
+        </jar>
+        <antcall target="clean" />
+    </target>
+</project>
